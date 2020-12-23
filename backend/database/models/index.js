@@ -10,8 +10,8 @@ const Band = sequelize.define(
     },
     band_name: { type: Sequelize.STRING },
     resource_url: { type: Sequelize.STRING },
-    created_at: { type: Sequelize.DATE },
-    updated_at: { type: Sequelize.DATE },
+    createdAt: { type: Sequelize.DATE },
+    updatedAt: { type: Sequelize.DATE },
   },
   {
     underscored: true,
@@ -29,8 +29,8 @@ const Album = sequelize.define(
     date_added: { type: Sequelize.DATE },
     year: { type: Sequelize.INTEGER },
     resource_url: { type: Sequelize.STRING },
-    created_at: { type: Sequelize.DATE },
-    updated_at: { type: Sequelize.DATE },
+    createdAt: { type: Sequelize.DATE },
+    updatedAt: { type: Sequelize.DATE },
   },
   {
     underscored: true,
@@ -50,8 +50,8 @@ const AlbumArtist = sequelize.define(
     band_id: {
       type: Sequelize.INTEGER,
     },
-    created_at: { type: Sequelize.DATE },
-    updated_at: { type: Sequelize.DATE },
+    createdAt: { type: Sequelize.DATE },
+    updatedAt: { type: Sequelize.DATE },
   },
   {
     underscored: true,
