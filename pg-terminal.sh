@@ -1,0 +1,1 @@
+docker exec -it database psql -h localhost -U postgres

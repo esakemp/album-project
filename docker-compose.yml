@@ -1,0 +1,40 @@
+version: "3.5"
+
+services:
+  db:
+    image: postgres:10-alpine
+    ports:
+      - "5421:5432"
+    container_name: database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/dumps/init.sql:/docker-entrypoint-initdb.d/init.sql
+  server:
+    depends_on:
+      - db
+    build:
+      context: backend
+      dockerfile: server/Dockerfile
+    container_name: server
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: postgres://postgres@db:5432
+  updater:
+    depends_on:
+      - db
+    build:
+      context: backend
+      dockerfile: updater/Dockerfile
+    container_name: updater
+    ports:
+      - "8081:8081"
+    environment:
+      DB_URL: postgres://postgres@db:5432
+  
+volumes:
+  pgdata:
+  dumps:
