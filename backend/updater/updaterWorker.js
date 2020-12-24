@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { Band, Album, AlbumArtist } = require('../database/models')
+const { Band, Album, AlbumArtist, Genre } = require('../database/models')
 
 const startUpdater = async () => {
   console.log('Fetching data')
@@ -26,6 +26,14 @@ const startUpdater = async () => {
           acc.albums.push(newAlbum)
         }
 
+        album.basic_information.styles.forEach((genre) => {
+          const newGenre = {
+            album_id: album.id,
+            name: genre,
+          }
+          acc.genres.push(newGenre)
+        })
+
         album.basic_information.artists.forEach((artist) => {
           const newArtist = {
             id: artist.id,
@@ -43,13 +51,18 @@ const startUpdater = async () => {
         })
         return acc
       },
-      { bands: [], albums: [], albumartists: [] },
+      { bands: [], albums: [], albumartists: [], genres: [] },
     )
+    
     console.log('Inserting data to db')
-    await Band.bulkCreate(formattedList.bands, { ignoreDuplicates: true })
-    await Album.bulkCreate(formattedList.albums, { ignoreDuplicates: true })
-    console.log(formattedList.albumartists)
-    await AlbumArtist.bulkCreate(formattedList.albumartists)
+
+    const { bands, albums, albumartists, genres } = formattedList
+
+    await Band.bulkCreate(bands, { ignoreDuplicates: true })
+    await Album.bulkCreate(albums, { ignoreDuplicates: true })
+    await AlbumArtist.bulkCreate(albumartists)
+    await Genre.bulkCreate(genres)
+
     console.log('Updater finished')
   } catch (err) {
     console.log(err)

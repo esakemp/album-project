@@ -58,6 +58,28 @@ const AlbumArtist = sequelize.define(
   },
 )
 
+const Genre = sequelize.define(
+  'genre',
+  {
+    id: {
+      primaryKey: true,
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+    },
+    album_id: {
+      type: Sequelize.INTEGER,
+    },
+    name: {
+      type: Sequelize.STRING,
+    },
+    createdAt: { type: Sequelize.DATE },
+    updatedAt: { type: Sequelize.DATE },
+  },
+  {
+    underscored: true,
+  },
+)
+
 Band.belongsToMany(Album, { through: AlbumArtist })
 Album.belongsToMany(Band, { through: AlbumArtist })
 Band.hasMany(AlbumArtist)
@@ -65,8 +87,12 @@ Album.hasMany(AlbumArtist)
 AlbumArtist.belongsTo(Band)
 AlbumArtist.belongsTo(Album)
 
+Album.hasMany(Genre)
+Genre.belongsTo(Album)
+
 module.exports = {
   Band,
   Album,
   AlbumArtist,
+  Genre,
 }
