@@ -10,5 +10,5 @@ RUN npm ci
 WORKDIR /usr/src/app/server
 EXPOSE 8080
 
-CMD node index.js
+CMD npm run dev
 

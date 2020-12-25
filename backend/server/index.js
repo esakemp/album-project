@@ -14,13 +14,10 @@ initializeDatabaseConnection()
     app.use(BASE_URL, bands)
     app.use(BASE_URL, albums)
 
-    // app.get('*', async (req, res) => {
-    //     const lol = Band.findAll({ attributes: ['id', 'name', 'resource_url'] })
-    //     const lol2 = await lol
-    //     console.log(lol)
-    //     const results = { error: 'unknown endpoint' }
-    //     res.status(404).json(results)
-    // })
+    app.get('*', async (req, res) => {
+      const results = { error: 'unknown endpoint' }
+      res.status(404).json(results)
+    })
 
     const PORT = '8080'
     const server = app.listen(PORT, () => console.log(`Backend listening on port ${PORT}!`))

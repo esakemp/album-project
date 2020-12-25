@@ -5,7 +5,7 @@ services:
     image: postgres:10-alpine
     ports:
       - "5421:5432"
-    container_name: database
+    container_name: albums-database
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_HOST_AUTH_METHOD=trust
@@ -18,22 +18,35 @@ services:
     build:
       context: backend
       dockerfile: server/Dockerfile
-    container_name: server
+    container_name: albums-server
     ports:
       - "8080:8080"
     environment:
       DB_URL: postgres://postgres@db:5432
+    volumes:
+      - ./backend/server:/usr/src/app/server
   updater:
     depends_on:
       - db
     build:
       context: backend
       dockerfile: updater/Dockerfile
-    container_name: updater
-    ports:
-      - "8081:8081"
+    container_name: albums-updater
     environment:
       DB_URL: postgres://postgres@db:5432
+    volumes:
+      - ./backend/updater:/usr/src/app/updater
+  frontend:
+    depends_on:
+      - server
+    build:
+      context: frontend
+      dockerfile: Dockerfile 
+    container_name: albums-frontend   
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./frontend/src:/usr/src/app/src
   
 volumes:
   pgdata:

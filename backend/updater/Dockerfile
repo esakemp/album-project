@@ -8,6 +8,6 @@ COPY ./database /usr/src/app/database
 
 RUN npm ci
 WORKDIR /usr/src/app/updater
-EXPOSE 8081
+# EXPOSE 8081
 
 CMD node index.js
