@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { getBands, getBandsAlbums } = require('../services/bandService')
 
-router.get('/api/artists', async (req, res) => {
+router.get('/api/bands', async (req, res) => {
   const data = await getBands()
   res.json(data)
 })

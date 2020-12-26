@@ -11,6 +11,9 @@ const App = () => (
           <Button component={Link} to="/">
             Frontpage
           </Button>
+          <Button component={Link} to="/bands">
+            Bands
+          </Button>
           <Button component={Link} to="/albums">
             Albums
           </Button>
