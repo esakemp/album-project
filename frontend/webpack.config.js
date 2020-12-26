@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
@@ -7,7 +6,7 @@ const apiAddress = process.env.BACKEND_ADDR || 'localhost'
 const backendURL = `http://${apiAddress}:${apiServerPort}`
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['@babel/polyfill', './src'],
   output: {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
@@ -38,9 +37,9 @@ module.exports = {
     proxy: [
       {
         context: ['/api'],
-        target: backendURL
-      }
+        target: backendURL,
+      },
     ],
-    disableHostCheck: true
+    disableHostCheck: true,
   },
 }

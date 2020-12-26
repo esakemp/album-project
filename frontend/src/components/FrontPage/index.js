@@ -1,8 +1,5 @@
 import React from 'react'
 
-const FrontPage = () => {
-
-    return <div>front page</div>
-}
+const FrontPage = () => <div style={{ fontFamily: 'monospace' }}>A simple discogs API app</div>
 
 export default FrontPage

@@ -1,25 +1,25 @@
 import React from 'react'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { AppBar, Toolbar, Button } from '@material-ui/core'
 import Routes from './Routes'
 
-const history = createBrowserHistory()
-
-export default () => {
-  const padding = { padding: 5 }
-  return (
-    <div>
-      <Router history={history}>
-        <div>
-          <Link style={padding} to="/">
-            home
-          </Link>
-          <Link style={padding} to="/albums">
+const App = () => (
+  <div>
+    <Router>
+      <AppBar style={{ background: '#556B2F' }}>
+        <Toolbar>
+          <Button component={Link} to="/">
+            Frontpage
+          </Button>
+          <Button component={Link} to="/albums">
             Albums
-          </Link>
-        </div>
-        <Routes />
-      </Router>
-    </div>
-  )
-}
+          </Button>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
+      <Routes />
+    </Router>
+  </div>
+)
+
+export default App
