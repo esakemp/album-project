@@ -42,7 +42,9 @@ services:
     build:
       context: frontend
       dockerfile: Dockerfile 
-    container_name: albums-frontend   
+    container_name: albums-frontend
+    environment: 
+      BACKEND_ADDR: server
     ports:
       - "8081:8081"
     volumes:

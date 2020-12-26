@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const bands = require('./routes/bands')
 const albums = require('./routes/albums')
 const { initializeDatabaseConnection } = require('../database/connection')
@@ -7,7 +8,7 @@ initializeDatabaseConnection()
   .then(() => {
     const app = express()
 
-    // app.use(cors({ credentials: true, origin: conf.frontend_addr }))
+    app.use(cors())
     // app.use(bodyParser.json())
 
     let BASE_URL = ''

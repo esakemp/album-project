@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-s
+
 const FrontPage = React.lazy(() => import('./components/FrontPage'))
 const AlbumPage = React.lazy(() => import('./components/AlbumPage'))
 
