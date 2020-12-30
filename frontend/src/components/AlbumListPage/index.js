@@ -20,7 +20,7 @@ const AlbumPage = () => {
   ))
   return (
     <div>
-      <h2 style={{ fontFamily: 'monospace' }}> Bands </h2>
+      <h2 style={{ fontFamily: 'monospace' }}> albums </h2>
       {pending && <CircularProgress />}
       <List>{albumRows}</List>
     </div>
