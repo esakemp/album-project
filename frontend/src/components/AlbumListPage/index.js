@@ -1,19 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { List, ListItem, ListItemText, CircularProgress } from '@material-ui/core'
+import { Pagination } from '@material-ui/lab'
 import { getAlbums } from '../../redux/albums'
 
 const AlbumPage = () => {
+  const [page, setPage] = useState(1)
+
   const dispatch = useDispatch()
   const { albums, pending } = useSelector(({ albums }) => ({
     albums: albums.data.sort((a, b) => a.title > b.title),
     pending: albums.pending,
   }))
   useEffect(() => {
-    dispatch(getAlbums())
+    if (albums.length < 1) {
+      dispatch(getAlbums())
+    }
   }, [])
 
-  const albumRows = albums.map(album => (
+  const handleChange = (event, value) => {
+    setPage(value)
+  }
+
+  const albumRows = albums.slice((page - 1) * 10, page * 10).map(album => (
     <ListItem key={album.id}>
       <ListItemText primary={album.title} secondary={album.bands.map(band => band.band_name).join(' / ')} />
     </ListItem>
@@ -21,8 +30,10 @@ const AlbumPage = () => {
   return (
     <div>
       <h2 style={{ fontFamily: 'monospace' }}> albums </h2>
-      {pending && <CircularProgress />}
+      <Pagination count={10} page={page} onChange={handleChange} />
+      {pending && albums.length < 1 && <CircularProgress />}
       <List>{albumRows}</List>
+      <Pagination count={10} page={page} onChange={handleChange} />
     </div>
   )
 }

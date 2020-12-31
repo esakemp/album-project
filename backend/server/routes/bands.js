@@ -6,8 +6,11 @@ router.get('/api/bands', async (req, res) => {
   res.json(data)
 })
 
-router.get('/api/artistalbum', async (req, res) => {
-  const data = await getBandsAlbums()
+router.get('/api/bands/:id', async (req, res) => {
+  const {
+    params: { id },
+  } = req
+  const data = await getBandsAlbums(id)
   res.json(data)
 })
 

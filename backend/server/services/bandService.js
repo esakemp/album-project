@@ -1,5 +1,7 @@
-const { Band, Album, AlbumArtist } = require('../../database/models')
-const { sequelize } = require('../../database/connection')
+const Sequelize = require('sequelize')
+const { Op } = Sequelize
+const { Band, Album, AlbumArtist, Genre } = require('../../database/models')
+const { sequelize: sequelizeConnection } = require('../../database/connection')
 
 const getBands = () =>
   Band.findAll({
@@ -7,7 +9,7 @@ const getBands = () =>
       include: [
         'band.id',
         'band.band_name',
-        [sequelize.fn('COUNT', sequelize.col('albumartists.album_id')), 'albumCount'],
+        [sequelizeConnection.fn('COUNT', sequelizeConnection.col('albumartists.album_id')), 'albumCount'],
       ],
     },
     include: [
@@ -19,13 +21,22 @@ const getBands = () =>
     group: ['band.id'],
   })
 
-const getBandsAlbums = () =>
-  Band.findAll({
+const getBandsAlbums = band_id =>
+  Band.find({
     include: {
       model: Album,
       through: {
         attributes: [],
       },
+      include: {
+        model: Genre,
+        through: {
+          attributes: [],
+        },
+      },
+    },
+    where: {
+      band_id: { [Op.eq]: band_id },
     },
   })
 
