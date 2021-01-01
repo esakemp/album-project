@@ -4,7 +4,9 @@
   "description": "",
   "main": "./restart.sh",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress": "CYPRESS_baseUrl=http://frontend:8081/ docker-compose -f docker-compose.yml -f ./docker/dco.cypress.yml up",
+    "cypress:open": "npx cypress open"
   },
   "repository": {
     "type": "git",
