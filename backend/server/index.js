@@ -1,19 +1,16 @@
 const express = require('express')
 const cors = require('cors')
-const bands = require('./routes/bands')
-const albums = require('./routes/albums')
 const { initializeDatabaseConnection } = require('../database/connection')
+const routes = require('./routes')
 
 initializeDatabaseConnection()
   .then(() => {
     const app = express()
 
     app.use(cors())
-    // app.use(bodyParser.json())
 
     let BASE_URL = ''
-    app.use(BASE_URL, bands)
-    app.use(BASE_URL, albums)
+    routes(app, BASE_URL)
 
     app.get('*', async (req, res) => {
       const results = { error: 'unknown endpoint' }
