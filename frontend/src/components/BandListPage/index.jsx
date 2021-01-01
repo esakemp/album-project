@@ -7,10 +7,17 @@ import { getBands } from '../../redux/bands'
 const BandPage = () => {
   const [page, setPage] = useState(1)
   const dispatch = useDispatch()
+
   const { bands, pending } = useSelector(({ bands }) => ({
-    bands: bands.data.sort((a, b) => a.band_name > b.band_name),
+    bands: bands.data.sort((a, b) => {
+      // Need to sort manually since browsers act differently
+      if (a.band_name > b.band_name) return 1
+      if (b.band_name > a.band_name) return -1
+      return 0
+    }),
     pending: bands.pending,
   }))
+
   useEffect(() => {
     if (bands.length < 1) {
       dispatch(getBands())
