@@ -25,17 +25,6 @@ services:
       DB_URL: postgres://postgres@db:5432
     volumes:
       - ./backend/server:/usr/src/app/server
-  updater:
-    depends_on:
-      - db
-    build:
-      context: backend
-      dockerfile: updater/Dockerfile
-    container_name: albums-updater
-    environment:
-      DB_URL: postgres://postgres@db:5432
-    volumes:
-      - ./backend/updater:/usr/src/app/updater
   frontend:
     depends_on:
       - server

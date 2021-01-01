@@ -1,0 +1,14 @@
+version: "3.5"
+
+services:
+  cypress:
+    image: "cypress/included:6.2.0"
+    environment: 
+      - CYPRESS_baseUrl=${CYPRESS_baseUrl}
+    working_dir: /e2e
+    volumes:
+      - ./cypress:/e2e/cypress
+      - ./cypress.json:/e2e/cypress.json
+      - ./node_modules:/node_modules
+    container_name: cypress
+    command: cypress run --browser chrome --headless
