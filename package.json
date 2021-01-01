@@ -1,0 +1,22 @@
+{
+  "name": "album-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./restart.sh",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esakemp/album-project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esakemp/album-project/issues"
+  },
+  "homepage": "https://github.com/esakemp/album-project#readme",
+  "devDependencies": {
+    "cypress": "^6.2.0"
+  }
+}
