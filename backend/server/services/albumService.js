@@ -11,6 +11,14 @@ const getAlbums = () =>
     },
   })
 
+const getAlbumAdditionDates = () =>
+  Album.count({
+    attributes: ['date_added'],
+    distinct: 'id',
+    group: ['date_added'],
+  })
+
 module.exports = {
   getAlbums,
+  getAlbumAdditionDates,
 }

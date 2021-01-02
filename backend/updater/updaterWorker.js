@@ -1,4 +1,5 @@
 const axios = require('axios')
+const moment = require('moment')
 const { Band, Album, AlbumArtist, Genre } = require('../database/models')
 
 const startUpdater = async () => {
@@ -18,7 +19,7 @@ const startUpdater = async () => {
         const newAlbum = {
           title: album.basic_information.title,
           year: album.basic_information.year,
-          date_added: album.date_added,
+          date_added: moment(album.date_added).calendar(),
           id: album.id,
           resource_url: album.basic_information.resource_url,
         }
