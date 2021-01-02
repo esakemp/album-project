@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const { initializeDatabaseConnection } = require('../database/connection')
+const { initializeDatabaseConnection } = require('./database/connection')
 const routes = require('./routes')
 
 initializeDatabaseConnection()

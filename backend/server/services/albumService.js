@@ -1,4 +1,4 @@
-const { Album, Band } = require('../../database/models')
+const { Album, Band } = require('../database/models')
 
 const getAlbums = () =>
   Album.findAll({

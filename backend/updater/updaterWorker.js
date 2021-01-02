@@ -1,6 +1,6 @@
 const axios = require('axios')
 const moment = require('moment')
-const { Band, Album, AlbumArtist, Genre } = require('../database/models')
+const { Band, Album, AlbumArtist, Genre } = require('./database/models')
 
 const startUpdater = async () => {
   console.log('Fetching data')

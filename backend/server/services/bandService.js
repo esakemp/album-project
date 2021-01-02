@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const { Op } = Sequelize
-const { Band, Album, AlbumArtist, Genre } = require('../../database/models')
-const { sequelize: sequelizeConnection } = require('../../database/connection')
+const { Band, Album, AlbumArtist, Genre } = require('../database/models')
+const { sequelize: sequelizeConnection } = require('../database/connection')
 
 const getBands = () =>
   Band.findAll({
