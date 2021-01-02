@@ -15,5 +15,8 @@ jobs:
       - name: npm ci
         run: npm ci
 
-      - name: npm run cypress
-        run: npm run cypress
+      - name: docker-compose up -d
+        run: docker-compose up -d
+
+      - name: Run cypress tests
+        run: ./node_modules/.bin/cypress run --headless *.spec.j
