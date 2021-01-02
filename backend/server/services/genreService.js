@@ -25,7 +25,6 @@ const getGenres = async () => {
     acc.push({ name: curr, count: Math.ceil(genreCounts[curr]) })
     return acc
   }, [])
-  console.log(formattedGenrecounts)
   return formattedGenrecounts
 }
 
