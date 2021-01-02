@@ -39,7 +39,7 @@ const BandPage = () => {
 
   return (
     <div>
-      <h2 style={{ fontFamily: 'monospace' }}> bands </h2>
+      <h2> bands </h2>
       <Pagination count={Math.ceil(bands.length / 10)} page={page} onChange={handleChange} />
       {pending && bands.length < 1 && <CircularProgress />}
       <List>{bandRows}</List>

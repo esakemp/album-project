@@ -5,7 +5,7 @@ import Navbar from './components/Navbar'
 import Routes from './Routes'
 
 const App = () => (
-  <div>
+  <div style={{ margin: 'auto', fontFamily: 'monospace', width: '50vh' }}>
     <Router>
       <Navbar />
       <Routes />

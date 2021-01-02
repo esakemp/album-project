@@ -34,7 +34,7 @@ const AlbumPage = () => {
   ))
   return (
     <div>
-      <h2 style={{ fontFamily: 'monospace' }}> albums </h2>
+      <h2> albums </h2>
       <Pagination count={Math.ceil(albums.length / 10)} page={page} onChange={handleChange} />
       {pending && albums.length < 1 && <CircularProgress />}
       <List>{albumRows}</List>

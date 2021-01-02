@@ -1,8 +1,8 @@
 const router = require('express').Router()
-const { getGenreCounts } = require('../services/genreService')
+const { getGenres } = require('../services/genreService')
 
-router.get('/api/genrecounts', async (req, res) => {
-  const data = await getGenreCounts()
+router.get('/api/genres', async (req, res) => {
+  const data = await getGenres()
   res.json(data)
 })
 

@@ -1,7 +1,7 @@
 // const sequelize = require('sequelize')
 const { Genre } = require('../../database/models')
 
-const getGenreCounts = () =>
+const getGenres = () =>
   Genre.count({
     attributes: ['name'],
     distinct: 'id',
@@ -9,5 +9,5 @@ const getGenreCounts = () =>
   })
 
 module.exports = {
-  getGenreCounts,
+  getGenres,
 }

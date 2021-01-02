@@ -1,7 +1,7 @@
 import callBuilder from '../util/apiConnection'
 
-export const getGenreCounts = () => {
-  const route = '/genrecounts'
+export const getGenres = () => {
+  const route = '/genres'
   const prefix = 'GET_GENRES'
   return callBuilder(route, prefix)
 }
