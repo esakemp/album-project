@@ -9,7 +9,7 @@ const AlbumPage = () => {
 
   const dispatch = useDispatch()
   const { albums, pending } = useSelector(({ albums }) => ({
-    albums: albums.data.sort((a, b) => {
+    albums: albums.data?.albums.sort((a, b) => {
       // Need to sort manually since browsers act differently
       if (a.title > b.title) return 1
       if (b.title > a.title) return -1
