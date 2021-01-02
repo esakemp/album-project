@@ -6,7 +6,7 @@ const startUpdater = async () => {
   console.log('Fetching data')
   try {
     const res = await axios.get(
-      'https://api.discogs.com/users/naamakala/collection/folders/0/releases?page=1&per_page=400',
+      'https://api.discogs.com/users/naamakala/collection/folders/0/releases?page=1&per_page=400'
     )
     console.log('Data fetched from discogs')
 
@@ -23,11 +23,11 @@ const startUpdater = async () => {
           id: album.id,
           resource_url: album.basic_information.resource_url,
         }
-        if (!acc.albums.find((alb) => alb.id === album.id)) {
+        if (!acc.albums.find(alb => alb.id === album.id)) {
           acc.albums.push(newAlbum)
         }
 
-        album.basic_information.styles.forEach((genre) => {
+        album.basic_information.styles.forEach(genre => {
           const newGenre = {
             album_id: album.id,
             name: genre,
@@ -35,13 +35,13 @@ const startUpdater = async () => {
           acc.genres.push(newGenre)
         })
 
-        album.basic_information.artists.forEach((artist) => {
+        album.basic_information.artists.forEach(artist => {
           const newArtist = {
             id: artist.id,
             band_name: artist.name,
             resource_url: artist.resource_url,
           }
-          if (!acc.bands.find((art) => art.id === artist.id)) {
+          if (!acc.bands.find(art => art.id === artist.id)) {
             acc.bands.push(newArtist)
           }
           const newAlbumArtist = {
@@ -52,9 +52,9 @@ const startUpdater = async () => {
         })
         return acc
       },
-      { bands: [], albums: [], albumartists: [], genres: [] },
+      { bands: [], albums: [], albumartists: [], genres: [] }
     )
-    
+
     console.log('Inserting data to db')
 
     const { bands, albums, albumartists, genres } = formattedList
