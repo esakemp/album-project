@@ -24,7 +24,7 @@ services:
     environment:
       DB_URL: postgres://postgres@db:5432
     volumes:
-      - ./backend/server:/usr/src/app/server
+      - ./backend/server:/usr/src/app/
   frontend:
     depends_on:
       - server
