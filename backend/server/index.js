@@ -1,6 +1,5 @@
 const express = require('express')
 const cors = require('cors')
-const { startUpdater } = require('./updaterWorker')
 const { initializeDatabaseConnection } = require('./database/connection')
 const routes = require('./routes')
 
@@ -9,7 +8,6 @@ initializeDatabaseConnection()
     const app = express()
 
     app.use(cors())
-    startUpdater()
     let BASE_URL = ''
     routes(app, BASE_URL)
 

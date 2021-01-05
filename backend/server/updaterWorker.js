@@ -65,8 +65,10 @@ const startUpdater = async () => {
     await Genre.bulkCreate(genres)
 
     console.log('Updater finished')
+    return `Updating done at ${new Date()}`
   } catch (err) {
     console.log(err)
+    return `Updating failed at ${new Date()}`
   }
 }
 
