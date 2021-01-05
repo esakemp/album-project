@@ -6,25 +6,38 @@ import { getGenres } from '../../redux/genres'
 
 const GenreGraph = () => {
   const dispatch = useDispatch()
-  const { genres, allGenreNames, pending } = useSelector(({ genres }) => ({
-    genres: genres.data
+  const { topGenres, rarestGenres, allGenreNames, pending } = useSelector(({ genres }) => {
+    const sortedAndFormattedGenres = genres.data
       .sort((a, b) => Number(b.count) - Number(a.count))
-      .slice(0, 10)
-      .map(genre => ({ x: genre.name, y: Number(genre.count) })),
-    allGenreNames: genres.data.map(genre => genre.name),
-    pending: genres.pending,
-  }))
+      .map(genre => ({ x: genre.name, y: Number(genre.count) }))
+    return {
+      topGenres: sortedAndFormattedGenres.slice(0, 10),
+      rarestGenres: sortedAndFormattedGenres.slice(
+        sortedAndFormattedGenres.length - 10,
+        sortedAndFormattedGenres.length
+      ),
+      allGenreNames: genres.data.map(genre => genre.name).sort(),
+      pending: genres.pending,
+    }
+  })
+
   useEffect(() => {
-    if (genres.length < 1) dispatch(getGenres())
+    if (topGenres.length < 1) dispatch(getGenres())
   }, [])
-  if (pending || genres.length < 1) return null
+  if (pending || topGenres.length < 1) return null
 
   return (
     <>
       <XYPlot margin={{ bottom: 100 }} xType="ordinal" width={500} height={500}>
         <XAxis tickLabelAngle={-45} />
-        <VerticalBarSeries data={genres} />
+        <VerticalBarSeries data={topGenres} />
       </XYPlot>
+      <h2>rarest genres</h2>
+      <XYPlot margin={{ bottom: 120 }} xType="ordinal" width={500} height={500}>
+        <XAxis tickLabelAngle={-45} />
+        <VerticalBarSeries data={rarestGenres} />
+      </XYPlot>
+      <h2>all genres in collection</h2>
       {allGenreNames.join(' - ')}
     </>
   )

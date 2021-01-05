@@ -25,7 +25,7 @@ const getGenres = async () => {
 
   const formattedGenrecounts = Object.keys(genreCounts).map(genre => ({
     name: genre,
-    count: Math.ceil(genreCounts[genre]),
+    count: genreCounts[genre],
   }))
   return formattedGenrecounts
 }
